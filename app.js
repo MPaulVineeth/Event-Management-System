@@ -120,6 +120,7 @@ app.post("/login", function (req, res) {
     req.login(user, function (err) {
         if (err) {
             console.log(err);
+            alert("Something went wrong! Try Again After Sometime!!!")
         } else {
             passport.authenticate("local")(req, res, function () {
                 res.redirect("/");
@@ -143,6 +144,7 @@ app.post("/register", function (req, res) {
         
         if (err) {
             console.log(err);
+            alert("Something went wrong! Try Again After Sometime!!!")
             res.redirect("/register");
         } else {
             passport.authenticate('local')(req, res, function () {
@@ -154,6 +156,7 @@ app.post("/register", function (req, res) {
                 }, function (err) {
                     if (err) {
                         console.log(err);
+                        alert("Something went wrong! Try Again After Sometime!!!")
                     }
                 })
                 res.redirect("/");
@@ -186,6 +189,7 @@ app.post("/add_item", function (req, res) {
             }], function (err) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     console.log("Successfully added to App");
                     res.redirect("/")
@@ -214,6 +218,7 @@ app.get("/apps/:appName", function (req, res) {
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     var eventsToAdd = [];
                     foundItems.forEach(item => {
@@ -247,6 +252,7 @@ app.get("/apps/:appName", function (req, res) {
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     var eventsToAdd = [];
                     foundItems.forEach(item => {
@@ -282,6 +288,7 @@ app.get("/apps/:appName/:eventId/event", function (req, res) {
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     res.render("events_view", {
                         firstName: req.user.firstName,
@@ -303,6 +310,7 @@ app.get("/apps/:appName/:eventId/event", function (req, res) {
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     res.render("events_view", {
                         foundEvents: foundItems
@@ -327,6 +335,7 @@ app.get("/apps/:appName/events/", function (req, res) {
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     res.render("events_view", {
                         firstName: req.user.firstName,
@@ -348,6 +357,7 @@ app.get("/apps/:appName/events/", function (req, res) {
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     res.render("events_view", {
                         foundEvents: foundItems
@@ -430,6 +440,7 @@ app.post("/:eventId/event-update", function (req, res) {
         }, function (err) {
             if (err) {
                 console.log(err);
+                alert("Something went wrong! Try Again After Sometime!!!")
             } else {
                 res.redirect("/")
             }
@@ -451,6 +462,7 @@ app.post("/update/:eventId", function (req, res) {
             }, function (err) {
                 if (err) {
                     console.log(err);
+                    alert("Something went wrong! Try Again After Sometime!!!")
                 } else {
                     res.redirect(backURL)
                 }
