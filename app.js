@@ -204,9 +204,7 @@ app.post("/add_item", function (req, res) {
 });
 
 app.get("/apps/:appName", function (req, res) {
-
-
-    if (req.isAuthenticated()) {
+   try{ if (req.isAuthenticated()) {
         appCollection.find({
             userID: req.user.id,
             name: req.params.appName
@@ -215,6 +213,7 @@ app.get("/apps/:appName", function (req, res) {
 
             eventCollection.find({
                 appID: foundApp[0]._id.valueOf()
+
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
@@ -273,7 +272,9 @@ app.get("/apps/:appName", function (req, res) {
             });
         })
     }
-
+}catch(err){
+    alert("Something Went Wrong !! Try Again!!")
+}
 });
 
 app.get("/apps/:appName/:eventId/event", function (req, res) {
