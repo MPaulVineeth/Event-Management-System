@@ -208,12 +208,12 @@ app.get("/apps/:appName", function (req, res) {
         appCollection.find({
             userID: req.user.id,
             name: req.params.appName
-        }, function (err, foundApp) { //should be single app for "foundApp"
+        },async function (err, foundApp) { //should be single app for "foundApp"
            
 
-            eventCollection.find({
-                appID: foundApp[0]._id.valueOf()
-
+            await eventCollection.find({
+                appID: foundApp[0]?._id.valueOf()
+                
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
@@ -225,7 +225,7 @@ app.get("/apps/:appName", function (req, res) {
                             title: item.eventName,
                             start: item.startTime,
                             end: item.endTime,
-                            url: "/apps/" + req.params.appName + "/" + item._id + "/event"
+                            url: "/apps/" + req.params.appName + "/" + item?._id + "/event"
                         })
                     });
                     
@@ -247,7 +247,7 @@ app.get("/apps/:appName", function (req, res) {
             
 
             eventCollection.find({
-                appID: foundApp[0]._id.valueOf()
+                appID: foundApp[0]?._id.valueOf()
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
@@ -332,7 +332,7 @@ app.get("/apps/:appName/events/", function (req, res) {
         }, function (err, foundApp) { //should be single app for "foundApp"
             
             eventCollection.find({
-                appID: foundApp[0]._id.valueOf()
+                appID: foundApp[0]?._id.valueOf()
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
@@ -354,7 +354,7 @@ app.get("/apps/:appName/events/", function (req, res) {
         }, function (err, foundApp) { //should be single app for "foundApp"
             
             eventCollection.find({
-                appID: foundApp[0]._id.valueOf()
+                appID: foundApp[0]?._id.valueOf()
             }, function (err, foundItems) {
                 if (err) {
                     console.log(err);
@@ -402,7 +402,7 @@ app.post("/:appName/event-submission", function (req, res) {
                 eventDay: req.body.eventDay,
                 eventYear: req.body.eventYear,
                 eventInfo: req.body.eventInfo,
-                appID: foundApp[0]._id.valueOf()
+                appID: foundApp[0]?._id.valueOf()
             }])
             res.redirect("/apps/" + req.params.appName);
         });
